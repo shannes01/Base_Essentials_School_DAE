@@ -1,0 +1,33 @@
+﻿namespace Base_Essentials
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            do
+            {
+                Console.WriteLine("1. Calculator");
+                Console.WriteLine("2. Exit");
+                Console.Write("Choose an option: ");
+                string option = Console.ReadLine() ?? "2";
+                switch (option)
+                {
+                    case "1":
+                        Console.Write("give number1:");
+                        int number1 = int.Parse(Console.ReadLine() ?? "0");
+                        Console.Write("\ngive number2:");
+                        int number2 = int.Parse(Console.ReadLine() ?? "0");
+                        Console.Write("\ngive operator:");
+                        string operator_ = Console.ReadLine() ?? "+";
+                        Console.WriteLine($"{number1} {operator_} {number2} = {Essentials.Calculator.CalculateToString(number1, number2, operator_)}");
+                        break;
+                    case "2":
+                        return;
+                    default:
+                        Console.WriteLine("Invalid option.");
+                        break;
+                }
+            } while (true);
+        }
+    }
+}
