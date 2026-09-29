@@ -113,5 +113,31 @@
                 default: throw new Exception($"Unknown operator '{op}'");
             }
         }
+
+        public static float CalculateSquare(float a, int root = 2)
+        {
+            return (float)Math.Pow(a, root);
+        }
+        public static float CalculateSquare(string a, int root = 2)
+        {
+            if (!float.TryParse(a, out var fa))
+            {
+                throw new Exception($"Unable to parse operand '{fa}'");
+            }
+            return (float)Math.Pow(fa, root);
+        }
+
+        public static float CalculateSquare(string a, string root = "2")
+        {
+            if (!float.TryParse(a, out var fa))
+            {
+                throw new Exception($"Unable to parse operand '{fa}'");
+            }
+            if (!int.TryParse(root, out var iroot))
+            {
+                throw new Exception($"Unable to parse root '{root}'");
+            }
+            return (float)Math.Pow(fa, iroot);
+        }
     }
 }
