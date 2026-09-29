@@ -139,5 +139,45 @@
             }
             return (float)Math.Pow(fa, iroot);
         }
+        public static float CalculateRoot(float a, int root = 2)
+        {
+            return (float)Math.Pow(a, 1.0 / root);
+        }
+        public static float CalculateRoot(string a, int root = 2)
+        {
+            if (!float.TryParse(a, out var fa))
+            {
+                throw new Exception($"Unable to parse operand '{fa}'");
+            }
+            return (float)Math.Pow(fa, 1.0 / root);
+        }
+
+        public static float CalculateRoot(string a, string root = "2")
+        {
+            if (!float.TryParse(a, out var fa))
+            {
+                throw new Exception($"Unable to parse operand '{fa}'");
+            }
+            if (!int.TryParse(root, out var iroot))
+            {
+                throw new Exception($"Unable to parse root '{root}'");
+            }
+            return (float)Math.Pow(fa, 1.0 / iroot);
+        }
     }
-}
+    internal class ReadAndWrite
+    {
+        public static string ReadlineWithDefault(string prompt, string defaultValue)
+        {
+            Console.Write(prompt);
+            string ?input = Console.ReadLine();
+            return string.IsNullOrWhiteSpace(input) ? defaultValue : input;
+        }
+        public static string ReadlineWithDefault(string prompt, string defaultValue, bool ShowDefaultValue)
+        {
+            Console.Write("(Default value = " + defaultValue + ")" + prompt);
+            string ?input = Console.ReadLine();
+            return string.IsNullOrWhiteSpace(input) ? defaultValue : input;
+        }
+    }
+    }

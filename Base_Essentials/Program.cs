@@ -10,8 +10,7 @@ namespace Base_Essentials
             {
                 Console.WriteLine("1. Calculator");
                 Console.WriteLine("2. Exit");
-                Console.Write("Choose an option: ");
-                string option = Console.ReadLine() ?? "2";
+                string ?option = Essentials.ReadAndWrite.ReadlineWithDefault("choose an option:", "Empty");
                 switch (option)
                 {
                     case "1":
@@ -19,41 +18,23 @@ namespace Base_Essentials
                         break;
                     case "2":
                         return;
+                    case "Empty":
+                        Console.WriteLine("Please choose an option.");
+                        break;
                     default:
                         Console.WriteLine("Invalid option.");
                         break;
                 }
             } while (true);
         }
-
-        static void Power()
-        {
-            Console.Write("give number:");
-            string number = Console.ReadLine() ?? "0";
-            Console.Write("\ngive power:");
-            string power = Console.ReadLine() ?? "0";
-            Console.WriteLine($"{number}^{power} = {Essentials.Calculator.CalculateSquare(number, power)}");
-        }
-
-        static void BaseCalculation()
-        {
-            Console.Write("give number1:");
-            int number1 = int.Parse(Console.ReadLine() ?? "0");
-            Console.Write("\ngive number2:");
-            int number2 = int.Parse(Console.ReadLine() ?? "0");
-            Console.Write("\ngive operator:");
-            string operator_ = Console.ReadLine() ?? "+";
-            Console.WriteLine($"{number1} {operator_} {number2} = {Essentials.Calculator.CalculateToString(number1, number2, operator_)}");
-        }
-
         static void Calculator()
         {
-            Console.WriteLine("1. baseCalculator");
+            Console.WriteLine("1. BaseCalculator");
             Console.WriteLine("2. PowerCalculator");
-            Console.WriteLine("3. Exit");
-            Console.Write("Choose an option: ");
-            string subOption = Console.ReadLine() ?? "1";
-            switch (subOption)
+            Console.WriteLine("3. RootCalculator");
+            Console.WriteLine("4. Exit");
+            string? option = Essentials.ReadAndWrite.ReadlineWithDefault("choose an option:", "Empty");
+            switch (option)
             {
                 case "1":
                     BaseCalculation();
@@ -62,12 +43,38 @@ namespace Base_Essentials
                     Power();
                     break;
                 case "3":
+                    root();
+                    break;
+                case "4":
                     return;
+                case "Empty":
+                    Console.WriteLine("Please choose an option.");
+                    Calculator();
+                    break;
                 default:
                     Console.WriteLine("Invalid option.");
                     Calculator();
                     break;
             }
+        }
+        static void root()
+        {
+            string number = Essentials.ReadAndWrite.ReadlineWithDefault("give number:", "0");
+            string root = Essentials.ReadAndWrite.ReadlineWithDefault("give root:", "2", true);
+            Console.WriteLine($"{number} root {root} = {Essentials.Calculator.CalculateRoot(number, root)}");
+        }
+        static void Power()
+        {
+            string number = Essentials.ReadAndWrite.ReadlineWithDefault("give number:", "0");
+            string power = Essentials.ReadAndWrite.ReadlineWithDefault("give power:", "2", true);
+            Console.WriteLine($"{number}^{power} = {Essentials.Calculator.CalculateSquare(number, power)}");
+        }
+        static void BaseCalculation()
+        {
+            string number = Essentials.ReadAndWrite.ReadlineWithDefault("give number:", "0");
+            string number2 = Essentials.ReadAndWrite.ReadlineWithDefault("give number2:", "0");
+            string operator_ = Essentials.ReadAndWrite.ReadlineWithDefault("give operator:", "+");
+            Console.WriteLine($"{number} {operator_} {number2} = {Essentials.Calculator.CalculateToString(number, number2, operator_)}");
         }
     }
 }
